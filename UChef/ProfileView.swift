@@ -15,8 +15,10 @@ struct ContentViewProfile: View {
     @State private var numberOfLikes: Int = 23
     @State private var dishesSold: Int = 12
     @State private var rating: Double = 4.9
+    @ObservedObject var authManager: AuthManager
     let topDishes = ["top-dish-1", "top-dish-2", "top-dish-3"]
     var body: some View {
+        NavigationView {
         VStack{
             VStack{
         
@@ -53,24 +55,25 @@ struct ContentViewProfile: View {
                                     //Follow link
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(Color(#colorLiteral(red: 0.01568627543747425, green: 0.7490196228027344, blue: 0.615686297416687, alpha: 1)))
-                                    .frame(width: 242, height: 48)
+                                        .frame(width: 242, height: 48)
                                     
                                     // Follow
-                                    Text("Follow")
-                                        .font(.title3)
-                                        .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                                        .fontWeight(.heavy)
-                                }
+                                    Button {
+                                        self.authManager.signedIn = false
+                                    } label: {
+                                        Text("Log out")
+                                            .font(.title3)
+                                            .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                                            .fontWeight(.heavy)
+                                    }
+
                                 
-                                ZStack{
-                                    //Chat Room Link
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(Color(#colorLiteral(red: 0.7686274647712708, green: 0.7686274647712708, blue: 0.7686274647712708, alpha: 0.20000000298023224)))
-                                    .frame(width: 51.1, height: 48.4)
-                                    
-                                    Image("Chat")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
+//                                    NavigationLink(destination: LoginView()) {
+//                                    Text("Log out")
+//                                        .font(.title3)
+//                                        .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+//                                        .fontWeight(.heavy)
+//                                    }
                                 }
                             }.padding(.top, 10)
                             
@@ -170,7 +173,7 @@ struct ContentViewProfile: View {
                                     }
                                     
                                 }
-                            }.frame(width: 210, height: 230)
+                            }.frame(width: 210, height: 270)
                                 .padding(.top, 20)
                         }
 
@@ -188,13 +191,13 @@ struct ContentViewProfile: View {
             .ignoresSafeArea()
         
         }
-        
+        }
     }
 }
 
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentViewProfile()
-    }
-}
+//struct ProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentViewProfile()
+//    }
+//}
