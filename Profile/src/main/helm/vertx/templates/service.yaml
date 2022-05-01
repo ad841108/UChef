@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vertx-profile-service
+  labels:
+    app: vertx
+spec:
+  selector:
+    app: vertx
+    tier: profile
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: LoadBalancer
+
+  
